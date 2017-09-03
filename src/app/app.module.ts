@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { appRouterModule } from './app.routes';
 import { RootComponent } from './root.component';
@@ -10,6 +11,7 @@ import { CreateFormComponent } from './create-form/create-form.component';
 import { ManageFormsComponent } from './manage-forms/manage-forms.component';
 import { ResponsesComponent } from './responses/responses.component';
 import { AboutComponent } from './about/about.component';
+import { FormFunctions } from './generics/form-functions.service';
 
 @NgModule({
   declarations: [
@@ -24,9 +26,11 @@ import { AboutComponent } from './about/about.component';
   ],
   imports: [
     BrowserModule,
-    appRouterModule
+    appRouterModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [FormFunctions],
   bootstrap: [RootComponent]
 })
 export class AppModule { }
