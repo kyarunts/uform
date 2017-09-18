@@ -1,0 +1,38 @@
+<p>
+  preview works!
+</p>
+<form [formGroup]="previewForm">
+    <div *ngFor="let object of controls">
+        <label [for]="object.label">
+            {{ object.label }}
+        </label>
+        <input
+            [id]="object.label" 
+            *ngIf="object?.type === 'input'" 
+            [formControlName]="object.label"
+            class="uform-input"
+            [maxlength]="object.maxlength"
+        >
+        <select 
+            *ngIf="object?.type === 'select'" 
+            [formControlName]="object.label"
+            class="uform-select"
+        >
+            <option
+                *ngFor="let option of object?.selectOptions"
+                [value]="option"
+            >
+                {{ option }}
+            </option>
+        </select>
+        <div *ngIf="errors[object.label]">
+            <span *ngIf="errors[object.label]['required']">
+                Required field
+            </span>
+        </div>
+    </div>
+</form>
+
+<button (click)="console()">
+    Console
+</button>

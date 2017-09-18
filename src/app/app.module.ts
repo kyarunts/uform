@@ -12,6 +12,7 @@ import { ManageFormsComponent } from './manage-forms/manage-forms.component';
 import { ResponsesComponent } from './responses/responses.component';
 import { AboutComponent } from './about/about.component';
 import { FormFunctions } from './generics/form-functions.service';
+import { PreviewComponent } from './create-form/preview/preview.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FormFunctions } from './generics/form-functions.service';
     ManageFormsComponent,
     ResponsesComponent,
     AboutComponent,
-    RootComponent
+    RootComponent,
+    PreviewComponent
   ],
   imports: [
     BrowserModule,

@@ -4,14 +4,15 @@ import {
     AbstractControl,
     FormBuilder,
     FormGroup,
-    Validators
+    Validators,
+    ValidatorFn
 } from '@angular/forms'
 
 @Injectable()
 export class FormFunctions {
 
     private currentPath: string;
-
+    public errorsObject: Object = {};
     constructor(private formBuilder: FormBuilder) {}
 
     private findControls(form, cb) {
@@ -55,14 +56,14 @@ export class FormFunctions {
         })
     }
 
-    public getErrors(form, onlyKeys: boolean = true): Object {
-        let errorsObject: Object = {}; 
-        this.findControls(form, (control: FormControl) => {
-            if (control.errors) {
-                errorsObject[this.getPath(control)] = control.errors;
-            }
-        });
-        return errorsObject;
+    public getErrors(form, onlyKeys: boolean = true): Object { 
+        if (form.errors) {
+            this.errorsObject[this.getPath(form)] = form.errors;
+        }
+        else {
+            delete this.errorsObject[this.getPath(form)];
+        }
+        return this.errorsObject;
     }
     
     public obj: Object = {
@@ -96,7 +97,8 @@ export class FormFunctions {
                 if (obj[key]['default']) {
                     defualtValue = obj[key]['default']; 
                 }
-                let formControl = new FormControl(defualtValue, validators);
+                let formControl = new FormControl(defualtValue);
+                formControl.setValidators(validators);
                 form.addControl(key, formControl);
             }
         }

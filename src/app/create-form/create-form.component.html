@@ -1,3 +1,94 @@
-<p>
-  create-form works!
-</p>
+<div class="create">
+    <div [hidden]="isHiddenAlreadyExistsError">
+        <p>
+            A form control with name <strong>{{label}}</strong> already exists in your form.
+            Please try again with a unique name.
+        </p>
+    </div>
+    <form [formGroup]="addForm">
+        <div class="create__input-group">
+            <label for="createLabel">Field name</label>
+            <input 
+                type="text" 
+                class="uform-input" 
+                formControlName="label" 
+                id="createLabel"
+            >
+            <div *ngIf="errors['label']">
+                <span 
+                    *ngIf="errors['label']['required']"
+                    class="uform-error"
+                >
+                    Required field
+                </span>
+            </div>
+        </div>
+        <div class="create__input-group">
+            <label for="createType">Field type</label>
+            <select 
+                formControlName="type"
+                id="createType"
+                class="uform-select"
+            >
+                <option value="input">Input</option>
+                <option value="select">Dropdown</option>  
+            </select>
+            <div *ngIf="errors['type']">
+                <span 
+                    *ngIf="errors['type']['required']"
+                    class="uform-error"
+                >
+                    Required field
+                </span>
+            </div>
+        </div>
+        <div [hidden]="isHiddenDropdownOptions">
+            Add comma separated options for your dropdown:
+            <textarea
+                cols="30" 
+                rows="10"
+                formControlName="selectOptions"
+                class="uform-textarea"
+            ></textarea> 
+            <div *ngIf="errors['selectOptions']">
+                <span 
+                    *ngIf="errors['selectOptions']['required']"
+                    class="uform-error"
+                >
+                    Required field
+                </span>
+            </div>
+        </div>
+        <div class="create__input-gtroup">
+            <label for="createRequired">Required</label>
+            <input 
+                id="createRequired"
+                type="checkbox"
+                formControlName="required"
+                class="uform-checkbox"
+            >
+        </div>
+        <div class="create__input-group">
+            <label for="createMaxLength">Max length</label>
+            <input 
+                id="createMaxLength" 
+                type="text" 
+                formControlName="maxLength"
+                class="uform-input"
+            >
+        </div>
+        <div class="create__input-group">
+            <label for="createDefaultValue">Default value</label>
+            <input 
+                id="createDefaultValue" 
+                type="text" 
+                formControlName="defaultValue"
+                class="uform-input"
+            >
+        </div>
+    </form>
+    <button (click)="addControl()" [disabled]="addForm.invalid">
+        Add Control
+    </button>
+    <app-preview [newFormObject]="newFormObject"></app-preview>
+</div>
