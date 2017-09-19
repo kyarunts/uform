@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
     FormGroup, 
     FormControl,
@@ -6,6 +7,8 @@ import {
 } from '@angular/forms';
 
 import { FormFunctions } from './../generics/form-functions.service';
+import { UserService } from "app/user/user.service";
+import { AuthService } from "app/user/auth.service";
 
 @Component({
     selector: 'app-sign-in',
@@ -32,7 +35,10 @@ export class SignInComponent implements OnInit {
     };
 
     constructor(
-        private formFunctions: FormFunctions
+        private formFunctions: FormFunctions,
+        private userService:UserService,
+        private authService: AuthService,
+        private router: Router
     ) {
         this.buildForms();
     }
@@ -54,6 +60,16 @@ export class SignInComponent implements OnInit {
         this.signInFormErrors = this.formFunctions.getErrors(this.signInForm);
         if (this.signInForm.valid) {
             console.log('Valid');
+            this.authService.login(this.signInForm.value)
+                .subscribe((data) => {
+                    if (data.json().success === false) {
+                        console.log(data.json().message);
+                    }
+                    else {
+                        this.router.navigate(['/responses']);
+                        console.log(data.json().message);
+                    }
+                })
         }
         else {
             console.log(this.signInForm.valid);
@@ -73,6 +89,15 @@ export class SignInComponent implements OnInit {
         this.signUpFormErrors = this.formFunctions.getErrors(this.signUpForm);
         if (this.signUpForm.valid) {
             console.log("do some staff");
+            this.userService.register(this.signUpForm.value)
+            .subscribe((data) => {
+                if(data.success === false) {
+                    alert(data.message);
+                }
+                else {
+                    alert(data.message);
+                }
+            }) 
         }
         else {
             console.log('doNothing');

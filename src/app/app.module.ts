@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { appRouterModule } from './app.routes';
 import { RootComponent } from './root.component';
@@ -13,6 +14,9 @@ import { ResponsesComponent } from './responses/responses.component';
 import { AboutComponent } from './about/about.component';
 import { FormFunctions } from './generics/form-functions.service';
 import { PreviewComponent } from './create-form/preview/preview.component';
+import { UserService } from 'app/user/user.service';
+import { AuthService } from 'app/user/auth.service';
+import { AuthGuard } from 'app/user/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -30,9 +34,10 @@ import { PreviewComponent } from './create-form/preview/preview.component';
     BrowserModule,
     appRouterModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpModule
   ],
-  providers: [FormFunctions],
+  providers: [FormFunctions, UserService, AuthService, AuthGuard],
   bootstrap: [RootComponent]
 })
 export class AppModule { }
