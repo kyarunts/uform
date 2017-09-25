@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const FormSchema = new Schema({
-    creator: {type:String},
+    creator: {type:Object},
     form : {type: Object}
 });
 

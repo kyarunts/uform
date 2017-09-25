@@ -21,7 +21,7 @@ exports.updateform = function(req, res, next) {
 
 exports.deleteform = function(req, res, next) {
     Form.remove({_id: req.params.id}, function(err){
-        if(err){ res.status(400).json({ success: false, message: 'Error deleting form '+ err }); }
+        if(err){ res.status(400).json({ success: false, message: 'Error deleting form '}); }
         res.status(201).json({
 		    success: true,
 		    message: 'Form deleted successfully'
@@ -32,15 +32,29 @@ exports.deleteform = function(req, res, next) {
 exports.getforms = function(req, res, next) {
     let token = req.headers['authorization'];
     jwt.verify(token, config.secret, function(err, decoded) {
-        Form.find({ creator: decoded._doc._id }).exec(function(err, forms) {
-            res.json(forms.map);
+        Form.find({ 'creator.id': decoded._doc._id }).exec(function(err, forms) {
+            if (err) {
+                return res.status(201).json({ success: false, message: 'Error on request', });		
+            }
+            if(forms) {
+                res.json(forms);
+            } else {
+                res.json({message: 'Requested form not found'})
+            }
         })
     })
 }
 
 exports.getform = function(req, res, next) {
     Form.find({ _id: req.params.id }).exec(function(err, form) {
-        res.json(form);
+        if (err) {
+            return res.status(201).json({ success: false, message: 'Error on request', });		
+        }
+        if(form) {
+            res.json(form[0]);
+        } else {
+            res.json({message: 'Requested form not found'})
+        }
     })
 }
 
@@ -51,8 +65,14 @@ exports.formsave = function(req, res, next) {
         if (err) {
             return res.status(201).json({ success: false, message: 'Authenticate token expired, please login again.', errcode: 'exp-token' });		
         } else {
+            console.log(decoded);
             let newForm = new Form();
-            newForm.creator = decoded._doc._id;
+            let creator = {
+                id : decoded._doc._id,
+                fullName: decoded._doc.fullName,
+                email : decoded._doc.email
+            };
+            newForm.creator = creator;
             newForm.form = req.body.form;
             newForm.save(function(err, form) {
                 if(err) {

@@ -4,44 +4,7 @@ var jwt = require('jsonwebtoken');
 var config = require('../config');
 var Form = require('../models/form');
 
-exports.getforms = function(req, res, next) {
-    let token = req.headers['authorization'];
-    jwt.verify(token, config.secret, function(err, decoded) {
-        Form.find({ creator: decoded._doc._id }).exec(function(err, forms) {
-            res.json(forms);
-        })
-    })
-}
 
-exports.getform = function(req, res, next) {
-    Form.find({ _id: req.params.id }).exec(function(err, form) {
-        res.json(form);
-    })
-}
-
-
-exports.formsave = function(req,res, next) {
-
-    let token = req.headers['authorization'];
-    jwt.verify(token, config.secret, function(err, decoded) {			
-        if (err) {
-            return res.status(201).json({ success: false, message: 'Authenticate token expired, please login again.', errcode: 'exp-token' });		
-        } else {
-            let newForm = new Form();
-            newForm.creator = decoded._doc._id;
-            newForm.form = req.body;
-            newForm.save(function(err, form) {
-                if(err) {
-                    return res.status(201).json({ success: false, message: 'Can\'t save form'});
-                }
-                else {
-                    return res.status(201).json({ success: true, message: 'Form saved'})
-                }
-            })
-        }
-    });
-
-}
 
 exports.signup = function(req, res, next){
     console.log(req.body);
