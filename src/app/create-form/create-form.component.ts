@@ -22,6 +22,7 @@ export class CreateFormComponent implements OnInit {
         maxLength: {},
         defaultValue: {}
     };
+    public subscription;
     public newFormObject: Object = {};
     private isHiddenAlreadyExistsError: boolean = true;
     private isHiddenDropdownOptions: boolean = true;
@@ -35,13 +36,6 @@ export class CreateFormComponent implements OnInit {
     ngOnInit() {
         this.createForm();
         this.subscriptions();
-        // this.addForm.get('type').valueChanges.subscribe(
-        //     (value) => {
-        //         this.dropdownOptions(value);
-        //         this.errors = this.formFunctions.getErrors(this.addForm.get('type'));
-        //     }
-        // )
-        
     }
     
     public subscriptions(): void {
@@ -59,7 +53,6 @@ export class CreateFormComponent implements OnInit {
         }
     }
 
-    public subscription;
     public dropdownOptions(value): void {
         let selectOptions = this.addForm.get('selectOptions');
         if (value && value === 'select') {

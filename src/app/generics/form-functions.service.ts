@@ -34,15 +34,20 @@ export class FormFunctions {
     
     private getPath(formControl, path: string = ''): string {
         this.currentPath = path;
-        for (let control in formControl.parent.controls) {
-            if (formControl === formControl.parent.get(control)) {
-                if (this.currentPath) {
-                    this.currentPath = control + '_' + path;
-                }
-                else {
-                    this.currentPath = control; 
+        if (formControl.parent) { 
+            for (let control in formControl.parent.controls) {
+                if (formControl === formControl.parent.get(control)) {
+                    if (this.currentPath) {
+                        this.currentPath = control + '_' + path;
+                    }
+                    else {
+                        this.currentPath = control; 
+                    }
                 }
             }
+        }
+        else {
+            return 'mainForm';
         }
         if ((formControl.parent.parent)) {
             this.getPath(formControl.parent, this.currentPath);
