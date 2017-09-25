@@ -32,7 +32,7 @@ export class PreviewComponent implements OnInit, OnChanges {
                 )
             }
         }
-        console.log(this.newFormObject);
+        console.dir(this.newFormObject);
     }
 
     console() {

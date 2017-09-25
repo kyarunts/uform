@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormService } from 'app/services/form/form.service';
 
 @Component({
   selector: 'app-manage-forms',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManageFormsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private formService: FormService) { }
 
   ngOnInit() {
+    this.formService.getForms()
+      .subscribe(data => {
+        console.dir(data);
+      })
   }
 
 }
