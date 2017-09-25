@@ -83,14 +83,22 @@ export class CreateFormComponent implements OnInit {
         if (!this.newFormObject.hasOwnProperty(this.label)) {
             this.newFormObject[this.label] = {};
             this.newFormObject[this.label]['label'] = this.label;
-            this.newFormObject[this.label]['default'] = this.addForm.get('defaultValue').value;
+            
+            if (this.addForm.get('defaultValue').value) {
+                this.newFormObject[this.label]['default'] = this.addForm.get('defaultValue').value;
+            }
+            else {
+                this.newFormObject[this.label]['default'] = '';
+            }
             this.newFormObject[this.label]['maxlength'] = +this.addForm.get('maxLength').value;
             this.newFormObject[this.label]['type'] = this.addForm.get('type').value;
             if (this.addForm.get('selectOptions').value) {
                 let splitted = this.addForm.get('selectOptions').value.split(',');
                 this.newFormObject[this.label]['selectOptions'] = splitted;
             }
-            
+            else {
+                this.newFormObject[this.label]['selectOptions'] = [];
+            }
             let validators: Array<ValidatorFn> = [];
             if (this.addForm.get('required').value) {
                 validators.push(Validators.required);
