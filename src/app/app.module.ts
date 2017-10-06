@@ -14,10 +14,13 @@ import { ResponsesComponent } from './responses/responses.component';
 import { AboutComponent } from './about/about.component';
 import { FormFunctions } from './generics/form-functions.service';
 import { PreviewComponent } from './create-form/preview/preview.component';
-import { UserService } from 'app/user/user.service';
-import { AuthService } from 'app/user/auth.service';
-import { AuthGuard } from 'app/user/auth-guard.service';
 import { NavbarComponent } from './navbar/navbar.component';
+import { UserService } from 'app/services/user/user.service';
+import { AuthService } from 'app/services/user/auth.service';
+import { AuthGuard } from 'app/services/user/auth-guard.service';
+import { FormService } from 'app/services/form/form.service';
+import { FormComponent } from './form/form.component';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +33,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     AboutComponent,
     RootComponent,
     PreviewComponent,
-    NavbarComponent
+    NavbarComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     FormsModule,
     HttpModule
   ],
-  providers: [FormFunctions, UserService, AuthService, AuthGuard],
+  providers: [FormFunctions, UserService, AuthService, AuthGuard, FormService ],
   bootstrap: [RootComponent]
 })
 export class AppModule { }

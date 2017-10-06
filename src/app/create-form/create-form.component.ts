@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, ValidatorFn } from '@angular/forms';
 
 import { FormFunctions } from './../generics/form-functions.service';
+import { FormService } from 'app/services/form/form.service';
 
 @Component({
     selector: 'app-create-form',
@@ -30,7 +31,8 @@ export class CreateFormComponent implements OnInit {
     public errors: Object = {};
 
     constructor(
-        private formFunctions: FormFunctions
+        private formFunctions: FormFunctions,
+        private formService: FormService
     ) { }
 
     ngOnInit() {
@@ -105,6 +107,9 @@ export class CreateFormComponent implements OnInit {
             }
             this.newFormObject[this.label]['validators'] = validators;
             this.newFormObject = Object.assign({}, this.newFormObject);
+            this.formService.formSave(this.newFormObject)
+                .subscribe(data => console.log(data));
+
             this.isHiddenAlreadyExistsError = true;
             this.addForm.reset();
         }

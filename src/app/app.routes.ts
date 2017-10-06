@@ -7,7 +7,8 @@ import { CreateFormComponent } from './create-form/create-form.component';
 import { ManageFormsComponent } from './manage-forms/manage-forms.component';
 import { ResponsesComponent } from './responses/responses.component';
 import { AboutComponent } from './about/about.component';
-import { AuthGuard } from 'app/user/auth-guard.service';
+import { AuthGuard } from 'app/services/user/auth-guard.service';
+import { FormComponent } from 'app/form/form.component';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent },
@@ -18,7 +19,9 @@ const routes: Routes = [
     { path: 'responses', canActivate: [ AuthGuard], component: ResponsesComponent },
     { path: 'about', component: AboutComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: 'form/:id', component: FormComponent },
     { path: '**', redirectTo: '/home', pathMatch: 'full' }
+
 ];
 
 export const appRouterModule = RouterModule.forRoot(routes);

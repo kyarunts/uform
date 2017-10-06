@@ -8,6 +8,8 @@ var jwt    = require('jsonwebtoken');
 var config = require('./config'); 
 
 var user = require('./routes/user.js');
+var form = require('./routes/form.js');
+
 
 var port = process.env.PORT || config.serverport;
 
@@ -46,7 +48,14 @@ app.use('/api', apiRoutes);
 
 apiRoutes.post('/login', user.login);
 
+app.get('/form/:id', form.getform);
+
 apiRoutes.use(user.authenticate); // route middleware to authenticate and check token
+app.use(user.authenticate);
+apiRoutes.post('/formsave', form.formsave);
+apiRoutes.get('/getforms', form.getforms);
+app.delete('/form/:id', form.deleteform);
+app.put('/form/:id', form.updateform);
 
 apiRoutes.get('/', function(req, res) {
 	res.status(201).json({ message: 'Welcome to the authenticated routes!' });

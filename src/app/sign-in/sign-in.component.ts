@@ -7,8 +7,9 @@ import {
 } from '@angular/forms';
 
 import { FormFunctions } from './../generics/form-functions.service';
-import { UserService } from "app/user/user.service";
-import { AuthService } from "app/user/auth.service";
+import { UserService } from 'app/services/user/user.service';
+import { AuthService } from 'app/services/user/auth.service';
+
 
 @Component({
     selector: 'app-sign-in',
