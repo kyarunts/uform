@@ -17,6 +17,7 @@ import { PreviewComponent } from './create-form/preview/preview.component';
 import { UserService } from 'app/user/user.service';
 import { AuthService } from 'app/user/auth.service';
 import { AuthGuard } from 'app/user/auth-guard.service';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AuthGuard } from 'app/user/auth-guard.service';
     ResponsesComponent,
     AboutComponent,
     RootComponent,
-    PreviewComponent
+    PreviewComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
