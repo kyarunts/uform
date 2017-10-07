@@ -4,11 +4,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background: url('../../assets/pattern.svg') center center;
+    font-family: 'Open Sans', sans-serif;
 
     &__container {
+        width: 25%;
+        min-width: 400px;
+        height: 50%;
+        min-height: 490px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border: none;
+        box-shadow: 7px 8px 14px -4px rgba(0, 0, 0, 0.7);
+        -webkit-box-shadow: 7px 8px 14px -4px rgba(0, 0, 0, 0.7);        
+        -moz-box-shadow: 7px 8px 14px -4px rgba(0, 0, 0, 0.7);
         display: flex;
         justify-content: center;
-        align-items: flex-start;
+        align-items: center;
         position: relative;
     }
 
@@ -18,12 +29,41 @@
         align-items: center;
         justify-content: center;
         margin: 0 10px;
+
+        &-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        &-button {
+            margin-top: 10px;
+        }
+
+    }
+    
+    &__create-a-new-account {
+        position: absolute;
+        bottom: 25px;
+        text-decoration: none;
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
     }
 
-    &__separator {
+    &__error-container {
         position: absolute;
-        height: 100%;
-        width: 4px;
-        background: black;
+        top: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 10px 0;
+        background-color: crimson;
+        color: white;
     }
+}
+
+.uform-input {
+    margin-bottom: 10px;
 }

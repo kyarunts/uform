@@ -1,7 +1,11 @@
 <div class="signin">
     <div class="signin__container">
-
-        <div class="signin__signin">
+        <div *ngIf="state==='sign-in'" class="signin__signin">
+            <div *ngIf="errorSignIn" class="signin__error-container">
+                <span class="signin__error">
+                    {{errorSignInMessage}}
+                </span>
+            </div>
             <span class="signin__signin-title">
                 Sign In
             </span>
@@ -30,16 +34,19 @@
             >
                 SIGN IN
             </button>
-            <span class="signin__alternate-signin">
-                or sign in with
-            </span>
-            <div class="signin__social-icons">
-                
+            <a 
+                (click)="changeState('sign-up')"
+                class="signin__create-a-new-account"
+            >
+                create a new account
+            </a>
+        </div>
+        <div *ngIf="state === 'sign-up'" class="signin__signup">
+            <div *ngIf="errorSignUp" class="signin__error-container">
+                <span class="signin__error">
+                    {{errorSignUpMessage}}
+                </span>
             </div>
-        </div>
-        <div class="signin__separator">
-        </div>
-        <div class="signin__signup">
             <span class="signin__signup-title">
                 Sign Up For Free
             </span>
@@ -67,6 +74,12 @@
             <button class="signin__signup-button uform-button" (click)="signup()">
                 SIGN UP
             </button>
+            <a 
+                class="signin__create-a-new-account"
+                (click)="changeState('sign-in')"
+            >
+                log in if you already have an account
+            </a>
         </div>
     </div>
 </div>

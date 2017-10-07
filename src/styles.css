@@ -28,3 +28,21 @@ body {
     border-radius: 3px;
     resize: none;
 }
+
+.uform-button {
+    height: 50px;
+    padding: 0 40px;
+    background-color: #66a0fd;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+}
+
+.uform-button:hover {
+    background-color: #2263d6;
+}

@@ -5,4 +5,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: url('../../assets/pattern.svg') center center;
+
+    &__slogan {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 26px;
+        color: white;
+        font-weight: 500;
+    }
 }
