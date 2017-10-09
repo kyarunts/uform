@@ -46,11 +46,11 @@ exports.getforms = function(req, res, next) {
 }
 
 exports.getform = function(req, res, next) {
-    Form.find({ _id: req.params.id }).exec(function(err, form) {
+    Form.find({ _id: req.params.id }).select('-creator.id').exec(function(err, form) {
         if (err) {
-            return res.status(201).json({ success: false, message: 'Error on request', });		
+            return res.status(201).json({ success: false, message: 'Error on request'});		
         }
-        if(form) {
+        if(form.length > 0) {
             res.json(form[0]);
         } else {
             res.json({message: 'Requested form not found'})

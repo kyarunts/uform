@@ -7,7 +7,6 @@ import {
 } from '@angular/forms';
 
 import { FormFunctions } from './../generics/form-functions.service';
-import { UserService } from 'app/services/user/user.service';
 import { AuthService } from 'app/services/user/auth.service';
 
 
@@ -42,7 +41,6 @@ export class SignInComponent implements OnInit {
 
     constructor(
         private formFunctions: FormFunctions,
-        private userService:UserService,
         private authService: AuthService,
         private router: Router
     ) {
@@ -95,7 +93,7 @@ export class SignInComponent implements OnInit {
         this.formFunctions.updateValueAndValidity(this.signUpForm);
         this.signUpFormErrors = this.formFunctions.getErrors(this.signUpForm);
         if (this.signUpForm.valid) {
-            this.userService.register(this.signUpForm.value)
+            this.authService.register(this.signUpForm.value)
                 .subscribe((data) => {
                     console.log(data);
                     if (data.success === false) {

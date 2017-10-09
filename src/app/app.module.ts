@@ -15,7 +15,6 @@ import { AboutComponent } from './about/about.component';
 import { FormFunctions } from './generics/form-functions.service';
 import { PreviewComponent } from './create-form/preview/preview.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { UserService } from 'app/services/user/user.service';
 import { AuthService } from 'app/services/user/auth.service';
 import { AuthGuard } from 'app/services/user/auth-guard.service';
 import { FormService } from 'app/services/form/form.service';
@@ -43,7 +42,7 @@ import { FormComponent } from './form/form.component';
     FormsModule,
     HttpModule
   ],
-  providers: [FormFunctions, UserService, AuthService, AuthGuard, FormService ],
+  providers: [FormFunctions, AuthService, AuthGuard, FormService ],
   bootstrap: [RootComponent]
 })
 export class AppModule { }

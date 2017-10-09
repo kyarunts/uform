@@ -37,7 +37,7 @@ app.use(function(req, res, next) {
 
 
 app.get('/', function(req, res) {
-	res.send('Expense Watch API is running at http://localhost:' + port + '/api');
+	res.send('hello("Hello")');
 });
 
 app.post('/register', user.signup);

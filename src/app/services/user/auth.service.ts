@@ -3,6 +3,7 @@ import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
 import { User } from './user';
@@ -13,21 +14,40 @@ export class AuthService {
 
     constructor(private http: Http) { }
 
+
+    public register(newUser) {
+        let headers = new Headers( { 'Content-type': 'application/json' });
+        let options = new RequestOptions({ headers: headers});
+    
+        return this.http.post('http://localhost:2017/register', JSON.stringify(newUser), options)
+          .do((response: Response) => {
+            if (response.json().success) {
+                this.tokenAssign(response);
+            }
+            response.json();
+        })
+          .catch(this.handleError);
+    }
+
     public login (userDetails) {
         let headers = new Headers({ 'Content-Type': 'application/json'});
         let options = new RequestOptions({headers: headers});
         return this.http.post('http://localhost:2017/api/login', JSON.stringify(userDetails), options)
             .do((response: Response) => {
                 if (response.json().success) {
-                    this.currentUser = <User>response.json().message;
-                    let userObj: any  = {};
-                    userObj.user = response.json().message;
-                    userObj.token = response.json().token;
-                    localStorage.setItem('currentUser', JSON.stringify(userObj));
+                    this.tokenAssign(response);
                 }
                 response.json();
             })
             .catch(this.handleError);
+    }
+
+    public tokenAssign(response) {
+        this.currentUser = <User>response.json().message;
+        let userObj: any  = {};
+        userObj.user = response.json().message;
+        userObj.token = response.json().token;
+        localStorage.setItem('currentUser', JSON.stringify(userObj));
     }
 
     public logout(): void {

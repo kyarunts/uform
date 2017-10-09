@@ -34,10 +34,13 @@ exports.signup = function(req, res, next){
 
         newUser.save(function(err, newUser) {
             if(err){ res.status(400).json({ success: false, message:'Error processing request '+ err}); }
-        
+            var token = jwt.sign(newUser, config.secret, {
+                expiresIn: config.tokenexp
+            });
             res.status(201).json({
                 success: true,
-		        message: 'User created successfully, please login to access your account.'
+                message: {'userid': newUser._id, 'username': newUser.username, 'firstname': newUser.firstname},
+                token: token
             });
         });
     });
@@ -53,18 +56,13 @@ exports.login = function(req, res, next){
 			user.comparePassword(req.body.password, function (err, isMatch) {
                 if (isMatch && !err) {
                     var token = jwt.sign(user, config.secret, {
-			        expiresIn: config.tokenexp
-		    });
-                
-                    user.save(function(err) {
-                        if(err){ res.status(400).json({ success: false, message:'Error processing request '+ err}); }
-
+			            expiresIn: config.tokenexp
+		            });
                         res.status(201).json({
                             success: true,
                             message: {'userid': user._id, 'username': user.username, 'firstname': user.firstname},
                             token: token
                         });
-                    });
                 } else {
                     res.status(201).json({ success: false, message: 'Incorrect login credentials.' });
                 }
