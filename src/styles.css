@@ -3,6 +3,7 @@ html,
 body {
     margin: 0;
     height: 100%;
+    font-family: 'Open Sans'
 }
 
 p {
@@ -10,7 +11,7 @@ p {
 }
 
 .uform-input, .uform-select {
-    /* min-width: 300px; */
+    width: 100%;
     height: 40px;
     border: 1px solid gray;
     padding: 0 15px;
@@ -18,11 +19,7 @@ p {
     outline: none;
     font-size: 16px;
     background: none;
-}
-
-.uform-checkbox {
-    height: 18px;
-    width: 18px;
+    box-sizing: border-box;
 }
 
 .uform-textarea {
@@ -32,6 +29,24 @@ p {
     font-size: 16px;
     border-radius: 3px;
     resize: none;
+    background: none;
+    box-sizing: border-box;
+}
+
+.uform-input--error {
+    border: 2px solid crimson;
+    margin-bottom: 5px;
+}
+
+.uform-error {
+    color: crimson;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.uform-checkbox {
+    height: 18px;
+    width: 18px;
 }
 
 .uform-button {

@@ -13,7 +13,8 @@
                 <label for="createLabel">Field name</label>
                 <input 
                     type="text" 
-                    class="uform-input" 
+                    class="uform-input"
+                    [ngClass]="{'uform-input--error' : errors['label']}"
                     formControlName="label" 
                     id="createLabel"
                 >
@@ -32,6 +33,7 @@
                     formControlName="type"
                     id="createType"
                     class="uform-select"
+                    [ngClass]="{'uform-input--error' : errors['type']}"
                 >
                     <option value="input">Input</option>
                     <option value="select">Dropdown</option>  
@@ -52,6 +54,7 @@
                 <textarea
                     formControlName="selectOptions"
                     class="uform-textarea"
+                    [ngClass]="{'uform-input--error' : errors['selectOptions']}"
                 ></textarea>
                 <div *ngIf="errors['selectOptions']">
                     <span 
@@ -90,12 +93,22 @@
                 >
             </div>
         </form>
-        <button (click)="addControl()" [disabled]="addForm.invalid">
-            Add Control
+        <button
+            class="create__add-control"
+            (click)="addControl()" 
+            [disabled]="addForm.invalid"
+        >
+            +
+            <p>
+                Add Control
+            </p>
         </button>
     </div>
     <div class="create__preview-form">
         <div class="create__preview-form-container">
+            <div>
+                This is how your form will look like
+            </div>
             <app-preview [newFormObject]="newFormObject"></app-preview>
         </div>
     </div>

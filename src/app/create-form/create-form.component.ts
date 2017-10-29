@@ -112,6 +112,7 @@ export class CreateFormComponent implements OnInit {
 
             this.isHiddenAlreadyExistsError = true;
             this.addForm.reset();
+            this.errors = {};
         }
         else {
             this.isHiddenAlreadyExistsError = false;
