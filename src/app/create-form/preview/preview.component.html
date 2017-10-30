@@ -1,9 +1,9 @@
 <div class="preview">
-    <p class="preview__title">
+    <p class="preview__title" [hidden]="formIsEmpty">
       This is how your form will look like
     </p>
-    <form [formGroup]="previewForm" class="preview__form">
-        <div *ngFor="let object of controls">
+    <form [hidden]="formIsEmpty" [formGroup]="previewForm" class="preview__form">
+        <div *ngFor="let object of controls" class="preview__input-group">
             <label [for]="object.label" class="preview__label">
                 {{ object.label }}
             </label>
@@ -34,9 +34,13 @@
                 </span>
             </div>
         </div>
+        <button class="uform-submit">Submit</button>
     </form>
-    <div class="test">hello</div>
-    <button (click)="console()">
-        Console
-    </button>
+    <div [hidden]="!formIsEmpty">
+        <div class="preview__add-controls">
+            <img src="../../../assets/add.svg">
+            Please add controls to your form from the left panel.<br>
+            Currently we support only Text fields and Dropdowns
+        </div>
+    </div>
 </div>

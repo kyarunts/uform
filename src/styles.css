@@ -66,3 +66,21 @@ p {
 .uform-button:hover {
     background-color: #2263d6;
 }
+
+.uform-submit {
+    width: 100%;
+    height: 40px;
+    border: none;
+    background-color: darkseagreen;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.uform-submit:hover {
+    background-color: lightcoral;
+}

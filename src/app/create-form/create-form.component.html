@@ -105,8 +105,21 @@
         </button>
     </div>
     <div class="create__preview-form">
-        <div class="create__preview-form-container">
-            <app-preview [newFormObject]="newFormObject"></app-preview>
+        <div 
+            class="create__preview-form-container"
+            [ngClass]="{'create__preview-form-container--empty' : formIsEmpty }"
+        >
+            <app-preview [formIsEmpty]="formIsEmpty" [newFormObject]="newFormObject"></app-preview>
         </div>
+        <button 
+            *ngIf="!formIsEmpty"
+            class="create__submit create__submit--enabled"
+            (click)="saveForm()"
+        >
+            SAVE THE FORM
+        </button>
+        <button *ngIf="formIsEmpty" class="create__submit create__submit--disabled">
+            ADD CONTROLS TO THE FORM TO SAVE IT
+        </button>
     </div>
 </div>

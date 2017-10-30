@@ -11,6 +11,7 @@ import { FormFunctions } from './../../generics/form-functions.service';
 })
 export class PreviewComponent implements OnInit, OnChanges {
     @Input() newFormObject: Object;
+    @Input() formIsEmpty: boolean;
     public previewForm: FormGroup;
     public controls: Array<Object> = [];
     public errors: Object = {};

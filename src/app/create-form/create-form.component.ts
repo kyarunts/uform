@@ -29,6 +29,7 @@ export class CreateFormComponent implements OnInit {
     private isHiddenDropdownOptions: boolean = true;
     private label: string; 
     public errors: Object = {};
+    public formIsEmpty: boolean = true;
 
     constructor(
         private formFunctions: FormFunctions,
@@ -107,12 +108,10 @@ export class CreateFormComponent implements OnInit {
             }
             this.newFormObject[this.label]['validators'] = validators;
             this.newFormObject = Object.assign({}, this.newFormObject);
-            this.formService.formSave(this.newFormObject)
-                .subscribe(data => console.log(data));
-
             this.isHiddenAlreadyExistsError = true;
             this.addForm.reset();
             this.errors = {};
+            this.formIsEmpty = false;
         }
         else {
             this.isHiddenAlreadyExistsError = false;
@@ -120,6 +119,13 @@ export class CreateFormComponent implements OnInit {
         
     }
 
+    public saveForm(): void {
+        this.formService.formSave(this.newFormObject).subscribe(
+            (data) => {
+                console.log(data);
+            }
+        )
+    }
     private createForm(): void {
         this.addForm = this.formFunctions.buildForm(this.addFormObject);
     }
